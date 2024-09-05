@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+
+import os
+import sys
+
+linkDict = {}
+
+def findSymlink(d):
+    entries = os.listdir(d)
+    for e in entries:
+        path = os.path.join(d, e)
+        if(os.path.islink(path)):
+            target = os.readlink(path)
+            if target in linkDict.keys():
+                linkDict[target] += [path]
+            else:
+                linkDict[target] = [path]
+        elif(os.path.isdir(path)):
+            findSymlink(path)
+
+findSymlink(sys.argv[1])
+
+for i in linkDict.keys():
+    print(i)
+    for j in linkDict[i]:
+        print("->", j)
