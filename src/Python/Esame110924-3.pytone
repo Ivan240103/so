@@ -1,0 +1,34 @@
+#!/usr/bin/python3
+
+import os
+import sys
+
+l = []
+
+def getSubtree(d):
+		entries = os.listdir(d)
+		for e in entries:
+		  	path = os.path.join(d, e)
+		  	l.append(path)
+		  	if (os.path.isdir(path)):
+		    		getSubtree(path)
+
+def findSymlink(d):
+		entries = os.listdir(d)
+		for e in entries:
+				path = os.path.join(d, e)
+				if (os.path.islink(path)):
+						l = []
+						getSubtree(d)
+						if path in l:
+								print("Internal link:", path)
+						else:
+								print("External link:", path)
+				elif (os.path.isdir(path)):
+						findSymlink(path)
+
+arg = "./"
+if(len(sys.argv) > 1):
+  	arg = sys.argv[1]
+    
+findSymlink(arg)
