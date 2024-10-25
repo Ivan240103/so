@@ -1,8 +1,6 @@
-# Supporto SO pratico
+# Blank Github page
 
-### Contenuto
- - **res**: pdf con gli appunti
- - **src**: spezzoni di codici utili
+Pagina vuota mantenuta per usi futuri
 
 ### Author
 Ivan De Simone
